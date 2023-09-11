@@ -1,4 +1,4 @@
-class HerramientasImp:
+class HerramientasImp_old:
 
     def __init__(self, lista):
         self.lista = lista

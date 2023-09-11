@@ -1,7 +1,15 @@
 class HerramientasImp:
 
     def __init__(self, lista):
-        self.lista = lista
+        assert type(lista) == list, f'{lista} no es una lista, se espera una lista de números enteros'
+        #self.lista = lista
+        if (len(lista) == 0):
+            self.lista = []
+            raise ValueError('Se ha creado una lista vacía. Se esperaba una lista de números enteros')  
+        else:
+            self.lista = lista
+        
+        
 
     def __verificar_primo(self,numero):
         primo=True
@@ -54,15 +62,20 @@ class HerramientasImp:
             return 1
     #primos
     def validar_primos (self):
+        primos = []
         for i in self.lista:
             if self.__verificar_primo(i)==True:
-                print('El numero',i,'es primo')
+                primos.append(i)
+                #print('El numero',i,'es primo')
             else:
-                print('El numero',i,'no es primo')
+                #print('El numero',i,'no es primo')
+                pass
+        return primos
     #modal
     def validar_modal (self):
         numero, cuenta = self.__valor_modal(self.lista)
-        print ('El número', numero, 'es el que mas se repite con un total de', cuenta,'veces')
+        #print ('El número', numero, 'es el que mas se repite con un total de', cuenta,'veces')
+        return numero, cuenta
     
     #grados
     def __escoger_nombre_temperatura(self,opcion):
@@ -79,11 +92,19 @@ class HerramientasImp:
     def validar_conversion(self,origen,destino):
         nombre_origen=self.__escoger_nombre_temperatura(origen)
         nombre_destino=self.__escoger_nombre_temperatura(destino)
-        
-        for i in self.lista:
-            print('El valor para una temperatura de {0} {1} a {2} es: {3:.2f} {2}'.format(i,nombre_origen,nombre_destino,self.__convert_temperaturas(i,origen,destino)))
+        convertidas=[]
+        if nombre_origen==None or nombre_destino==None:
+            print('Los párametros esperados son C F ó K')
+        else:
+            for i in self.lista:
+                convertidas.append(self.__convert_temperaturas(i,origen,destino))
+                #print('El valor para una temperatura de {0} {1} a {2} es: {3:.2f} {2}'.format(i,nombre_origen,nombre_destino,self.__convert_temperaturas(i,origen,destino)))
+        return convertidas
 
     #factorial
     def validar_factorial(self):
+        factoriales=[]
         for i in self.lista:
-            print('El factorial de',i,'es:',self.__factorial(i))
+            factoriales.append(self.__factorial(i))
+            #print('El factorial de',i,'es:',self.__factorial(i))
+        return factoriales
